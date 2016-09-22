@@ -2,18 +2,10 @@ import React, { PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 
-import AccountsUIWrapper from '../accounts/AccountsUIWrapper.jsx';
+import Header from './Header.jsx';
 
 const HeaderContainer = (props) => (
-  <div>
-    <AccountsUIWrapper />
-    {props.currentUser &&
-      <div>
-        <button>Profile</button>
-        <button>Posts</button>
-      </div>
-    }
-  </div>
+  <Header currentUser={props.currentUser} />
 );
 
 HeaderContainer.propTypes = {
