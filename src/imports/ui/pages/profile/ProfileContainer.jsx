@@ -1,10 +1,10 @@
-import React, { PropTypes } from 'react';
+import { createContainer } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
 
-const ProfileContainer = (props) => {
-  return (<div>MyComponent</div>);
-};
+import Profile from './Profile.jsx';
 
-ProfileContainer.propTypes = {
-};
-
-export default ProfileContainer;
+export default createContainer(() => (
+  {
+    currentUser: Meteor.user(),
+  }
+), Profile);
