@@ -12,7 +12,7 @@ export default class Header extends Component {
         {this.props.currentUser &&
           <div>
             <button onClick={() => FlowRouter.go('/profile')}>Profile</button>
-            {/* <button onClick={FlowRouter.go('/posts')}>Posts</button> */}
+            <button onClick={() => FlowRouter.go('/posts')}>Posts</button>
           </div>
         }
       </div>
