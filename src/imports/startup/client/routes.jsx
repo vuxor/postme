@@ -33,3 +33,30 @@ FlowRouter.route('/posts', {
     });
   },
 });
+
+FlowRouter.route('/posts/public', {
+  name: 'posts.public',
+  action() {
+    mount(MainLayout, {
+      main: <PostsContainer />,
+    });
+  },
+});
+
+FlowRouter.route('/posts/private', {
+  name: 'posts.private',
+  action() {
+    mount(MainLayout, {
+      main: <PostsContainer />,
+    });
+  },
+});
+
+FlowRouter.route('/posts/public/best', {
+  name: 'posts.public.best',
+  action() {
+    mount(MainLayout, {
+      main: <PostsContainer />,
+    });
+  },
+});
