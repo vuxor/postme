@@ -61,6 +61,7 @@ npm-bcrypt@0.9.1
 npm-mongo@1.5.49
 observe-sequence@1.0.12
 ordered-dict@1.0.8
+practicalmeteor:faker@3.0.1_1
 promise@0.8.7
 random@1.0.10
 rate-limit@1.0.5

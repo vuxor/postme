@@ -25,3 +25,4 @@ react-meteor-data
 accounts-ui
 accounts-password
 jparker:gravatar
+practicalmeteor:faker
