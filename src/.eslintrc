@@ -1,0 +1,23 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "meteor": true,
+    "node": true
+  },
+  "plugins": [
+    "meteor"
+  ],
+  "extends": [
+    "airbnb",
+    "plugin:meteor/recommended"
+  ],
+  "rules": {
+    "meteor/eventmap-params": [
+      2, { "templateInstanceParamName": "instance" }
+    ],
+    "import/no-unresolved": [
+      2, { "ignore": ["^meteor/"] }
+    ]
+  }
+}
