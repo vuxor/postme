@@ -1,10 +1,10 @@
-import React, {PropTypes} from 'react';
+import { createContainer } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
 
-const PostsContainer = (props) => {
-  return (<div>All my posts</div>);
-}
+import Posts from './Posts.jsx';
 
-PostsContainer.propTypes = {
-};
-
-export default PostsContainer;
+export default createContainer(() => (
+  {
+    currentUser: Meteor.user(),
+  }
+), Posts);
