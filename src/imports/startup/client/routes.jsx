@@ -7,6 +7,7 @@ import HomeContainer from '../../ui/pages/home/HomeContainer.jsx';
 import ProfileContainer from '../../ui/pages/profile/ProfileContainer.jsx';
 import PostsContainer from '../../ui/pages/posts/PostsContainer.jsx';
 import PostsPublicContainer from '../../ui/pages/posts/public/PostsPublicContainer.jsx';
+import PostsPrivateContainer from '../../ui/pages/posts/private/PostsPrivateContainer.jsx';
 
 FlowRouter.route('/', {
   name: 'home',
@@ -48,7 +49,7 @@ FlowRouter.route('/posts/private', {
   name: 'posts.private',
   action() {
     mount(MainLayout, {
-      main: <PostsContainer />,
+      main: <PostsPrivateContainer />,
     });
   },
 });
