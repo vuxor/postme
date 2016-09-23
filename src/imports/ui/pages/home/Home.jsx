@@ -32,7 +32,7 @@ export default class Home extends Component {
           skip={this.state.skip}
           limit={this.state.limit}
         />
-        {this.state.hitLimit ? '' :
+        {!this.state.hitLimit &&
           <button onClick={() => this.setParams()}>Load more</button>
         }
       </div>
