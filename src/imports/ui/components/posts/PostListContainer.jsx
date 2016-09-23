@@ -10,7 +10,13 @@ export default createContainer((params) => {
   let posts = [];
   let users = [];
   if (!loading) {
-    posts = Posts.find().fetch();
+    posts = Posts.find({}, {
+      sort: {
+        createdAt: -1,
+      },
+      skip: params.skip,
+      limit: params.limit,
+    }).fetch();
     users = Meteor.users.find().fetch();
   }
   return {
