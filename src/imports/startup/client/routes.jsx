@@ -3,7 +3,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { mount } from 'react-mounter';
 
 import MainLayout from '../../ui/layouts/MainLayout.jsx';
-import HomeContainer from '../../ui/pages/home/HomeContainer.jsx';
+import Home from '../../ui/pages/home/Home.jsx';
 import ProfileContainer from '../../ui/pages/profile/ProfileContainer.jsx';
 import PostsContainer from '../../ui/pages/posts/PostsContainer.jsx';
 import PostsPublicContainer from '../../ui/pages/posts/public/PostsPublicContainer.jsx';
@@ -14,7 +14,7 @@ FlowRouter.route('/', {
   name: 'home',
   action() {
     mount(MainLayout, {
-      main: <HomeContainer />,
+      main: <Home />,
     });
   },
 });
