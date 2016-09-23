@@ -8,8 +8,10 @@ export default class Home extends Component {
     this.state = {
       limit: 10,
       skip: 0,
+      hitLimit: false,
     };
     this.setParams = this.setParams.bind(this);
+    this.hitLimitHandle = this.hitLimitHandle.bind(this);
   }
   setParams() {
     this.setState({
@@ -17,11 +19,22 @@ export default class Home extends Component {
       skip: this.state.skip + 10,
     });
   }
+  hitLimitHandle() {
+    this.setState({
+      hitLimit: true,
+    });
+  }
   render() {
     return (
       <div>
-        <PostListContainer skip={this.state.skip} limit={this.state.limit} />
-        <button onClick={() => this.setParams()}>Load more</button>
+        <PostListContainer
+          hitLimitFunc={this.hitLimitHandle}
+          skip={this.state.skip}
+          limit={this.state.limit}
+        />
+        {this.state.hitLimit ? '' :
+          <button onClick={() => this.setParams()}>Load more</button>
+        }
       </div>
     );
   }

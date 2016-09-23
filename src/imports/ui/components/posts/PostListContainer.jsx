@@ -18,6 +18,9 @@ export default createContainer((params) => {
       limit: params.limit,
     }).fetch();
     users = Meteor.users.find().fetch();
+    if (Posts.find().count() < params.limit) {
+      params.hitLimitFunc();
+    }
   }
   return {
     posts,
