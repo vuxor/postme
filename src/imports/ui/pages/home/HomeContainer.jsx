@@ -1,10 +1,21 @@
-import React, { PropTypes } from 'react';
+import { createContainer } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
+import { Posts } from '../../../api/posts/posts.js';
 
-export default class HomeContainer  extends React.Component {
-  render() {
-    return (<div>Home container component</div>);
+import Home from './Home.jsx';
+
+export default createContainer(() => {
+  const handle = Meteor.subscribe('Posts.public', 20);
+  const loading = !handle.ready();
+  let posts = [];
+  let users = [];
+  if (!loading) {
+    posts = Posts.find().fetch();
+    users = Meteor.users.find().fetch();
   }
-}
-
-HomeContainer.propTypes = {
-};
+  return {
+    posts,
+    users,
+    loading,
+  };
+}, Home);
