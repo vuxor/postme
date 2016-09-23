@@ -46,6 +46,7 @@ Meteor.startup(() => {
         title: faker.lorem.sentence(),
         text: faker.lorem.paragraph(),
         votes: faker.random.number(100),
+        private: faker.random.boolean(),
         comments: makeComments(),
       });
     }
