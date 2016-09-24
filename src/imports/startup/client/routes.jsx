@@ -44,6 +44,10 @@ FlowRouter.route('/posts', {
 FlowRouter.route('/posts/public', {
   name: 'posts.public',
   action() {
+    if (!Meteor.userId()) {
+      FlowRouter.go('home');
+      return;
+    }
     mount(MainLayout, {
       main: <UserPublicPosts />,
     });
@@ -53,6 +57,10 @@ FlowRouter.route('/posts/public', {
 FlowRouter.route('/posts/private', {
   name: 'posts.private',
   action() {
+    if (!Meteor.userId()) {
+      FlowRouter.go('home');
+      return;
+    }
     mount(MainLayout, {
       main: <UserPrivatePosts />,
     });
