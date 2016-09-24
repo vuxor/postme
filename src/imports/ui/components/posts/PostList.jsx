@@ -10,6 +10,7 @@ export default class PostList extends React.Component {
     this.findUsername = this.findUsername.bind(this);
     this.comments = this.comments.bind(this);
     this.modifyButtons = this.modifyButtons.bind(this);
+    this.canVote = this.canVote.bind(this);
   }
   componentWillReceiveProps(nextProps) {
     const newList = this.state.listData.concat(nextProps.posts);
@@ -21,6 +22,15 @@ export default class PostList extends React.Component {
     // this will remove duplication of data
     // when switch from best to home and oposite
     this.props.handle.stop();
+  }
+  canVote(post) {
+    let youCanVote = true;
+    const template = (<button>Vote</button>);
+    if (post.private) youCanVote = false;
+    if (post.userId === Meteor.userId()) youCanVote = false;
+    if (post.voters.indexOf(Meteor.userId()) > -1) youCanVote = false;
+
+    return youCanVote ? template : '';
   }
   modifyButtons(userId) {
     if (userId === Meteor.userId()) {
@@ -53,7 +63,12 @@ export default class PostList extends React.Component {
       this.state.listData.map((post, i) =>
         <div key={post._id}>
           <p><span>{i + 1}. {post.title} - {this.findUsername(post.userId)}</span></p>
-          <p>votes: {post.votes}, {this.comments(post)}, {this.modifyButtons(post.userId)}</p>
+          <p>
+            votes: {post.votes},
+            {this.comments(post)},
+            {this.modifyButtons(post.userId)},
+            {this.canVote(post)}
+          </p>
         </div>
       )
     );
