@@ -21,6 +21,7 @@ export default class PostList extends React.Component {
         /* eslint no-underscore-dangle: 0 */
         <div key={post._id}>
           <p><span>{i + 1}. {post.title} - {post._id}</span></p>
+          <p>votes: {post.votes}</p>
         </div>
       )
     );

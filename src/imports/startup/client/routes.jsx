@@ -8,7 +8,7 @@ import ProfileContainer from '../../ui/pages/profile/ProfileContainer.jsx';
 import PostsContainer from '../../ui/pages/posts/PostsContainer.jsx';
 import UserPublicPosts from '../../ui/pages/posts/public/UserPublicPosts.jsx';
 import UserPrivatePosts from '../../ui/pages/posts/private/UserPrivatePosts.jsx';
-import PostsBestContainer from '../../ui/pages/posts/best/PostsBestContainer.jsx';
+import UsersBestPosts from '../../ui/pages/posts/best/UsersBestPosts.jsx';
 
 FlowRouter.route('/', {
   name: 'home',
@@ -59,7 +59,7 @@ FlowRouter.route('/posts/public/best', {
   name: 'posts.public.best',
   action() {
     mount(MainLayout, {
-      main: <PostsBestContainer />,
+      main: <UsersBestPosts />,
     });
   },
 });
