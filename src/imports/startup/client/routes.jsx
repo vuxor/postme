@@ -7,7 +7,7 @@ import Home from '../../ui/pages/home/Home.jsx';
 import ProfileContainer from '../../ui/pages/profile/ProfileContainer.jsx';
 import PostsContainer from '../../ui/pages/posts/PostsContainer.jsx';
 import UserPublicPosts from '../../ui/pages/posts/public/UserPublicPosts.jsx';
-import PostsPrivateContainer from '../../ui/pages/posts/private/PostsPrivateContainer.jsx';
+import UserPrivatePosts from '../../ui/pages/posts/private/UserPrivatePosts.jsx';
 import PostsBestContainer from '../../ui/pages/posts/best/PostsBestContainer.jsx';
 
 FlowRouter.route('/', {
@@ -50,7 +50,7 @@ FlowRouter.route('/posts/private', {
   name: 'posts.private',
   action() {
     mount(MainLayout, {
-      main: <PostsPrivateContainer />,
+      main: <UserPrivatePosts />,
     });
   },
 });

@@ -27,3 +27,13 @@ Meteor.publish('Posts.user.public', function (l = 10) {
   }
   return Posts.find({ $and: [{ private: false }, { userId: this.userId }] }, { limit });
 });
+// eslint-disable-next-line func-names
+Meteor.publish('Posts.user.private', function (l = 10) {
+  check(l, Number);
+  let limit = l;
+  const count = Posts.find({ $and: [{ private: true }, { userId: this.userId }] }).count();
+  if (limit > count) {
+    limit = count;
+  }
+  return Posts.find({ $and: [{ private: true }, { userId: this.userId }] }, { limit });
+});
