@@ -1,3 +1,4 @@
+/* eslint no-underscore-dangle: 0 */
 import React, { PropTypes } from 'react';
 
 export default class PostList extends React.Component {
@@ -6,6 +7,9 @@ export default class PostList extends React.Component {
     this.state = {
       listData: [],
     };
+    this.findUsername = this.findUsername.bind(this);
+    this.comments = this.comments.bind(this);
+    this.modifyButtons = this.modifyButtons.bind(this);
   }
   componentWillReceiveProps(nextProps) {
     const newList = this.state.listData.concat(nextProps.posts);
@@ -18,14 +22,38 @@ export default class PostList extends React.Component {
     // when switch from best to home and oposite
     this.props.handle.stop();
   }
+  modifyButtons(userId) {
+    if (userId === Meteor.userId()) {
+      return (
+        <span>
+          <button>Edit</button>
+          <button>Delete</button>
+        </span>
+      );
+    }
+    return false;
+  }
+  findUsername(userId) {
+    const currUser = this.props.users.find(user => user._id === userId);
+    // this will remove errors in console but
+    // it will cause flickering usernames
+    return currUser ? currUser.username : '';
+  }
+  comments(post) {
+    const num = post.comments.length;
+    if (num) {
+      if (num === 1) return '1 comment';
+      return `${post.comments.length} comments`;
+    }
+    return 'no comments';
+  }
   render() {
     const { loading } = this.props;
     const listDataDisplay = (
       this.state.listData.map((post, i) =>
-        /* eslint no-underscore-dangle: 0 */
         <div key={post._id}>
-          <p><span>{i + 1}. {post.title} - {post._id}</span></p>
-          <p>votes: {post.votes}</p>
+          <p><span>{i + 1}. {post.title} - {this.findUsername(post.userId)}</span></p>
+          <p>votes: {post.votes}, {this.comments(post)}, {this.modifyButtons(post.userId)}</p>
         </div>
       )
     );

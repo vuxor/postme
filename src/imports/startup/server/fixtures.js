@@ -45,6 +45,7 @@ Meteor.startup(() => {
         userId: faker.random.arrayElement(userIds),
         title: faker.lorem.sentence(),
         text: faker.lorem.paragraph(),
+        url: faker.internet.url(),
         votes: faker.random.number(100),
         private: faker.random.boolean(),
         createdAt: new Date(),
