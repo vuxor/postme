@@ -13,10 +13,11 @@ export default class PostList extends React.Component {
     this.canVote = this.canVote.bind(this);
   }
   componentWillReceiveProps(nextProps) {
-    const newList = this.state.listData.concat(nextProps.posts);
-    this.setState({
-      listData: newList,
-    });
+    if (nextProps.userid === this.props.userid) {
+      this.setState({
+        listData: this.state.listData.concat(nextProps.posts),
+      });
+    }
   }
   componentWillUnmount() {
     // this will remove duplication of data
@@ -86,4 +87,5 @@ PostList.propTypes = {
   users: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
   handle: PropTypes.object.isRequired,
+  userid: PropTypes.string,
 };

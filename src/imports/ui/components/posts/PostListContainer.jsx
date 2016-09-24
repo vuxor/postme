@@ -6,6 +6,7 @@ import { Posts } from '../../../api/posts/posts.js';
 
 export default createContainer((params) => {
   const { sub, limit, skip } = params;
+  const userid = Meteor.userId();
   const handle = Meteor.subscribe(sub, limit);
   const loading = !handle.ready();
   let posts = [];
@@ -24,5 +25,6 @@ export default createContainer((params) => {
     users,
     loading,
     handle,
+    userid,
   };
 }, PostList);
