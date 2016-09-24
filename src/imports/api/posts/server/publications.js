@@ -1,7 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { Posts } from '../posts.js';
+import { check } from 'meteor/check';
 
 Meteor.publish('Posts.public', (l = 10) => {
+  check(l, Number);
   let limit = l;
   const count = Posts.find({ private: false }).count();
   if (limit > count) {
@@ -14,4 +16,14 @@ Meteor.publish('Posts.public', (l = 10) => {
     publicPosts,
     users,
   ];
+});
+
+Meteor.publish('Posts.user.public', function userPublic(l = 10) {
+  check(l, Number);
+  let limit = l;
+  const count = Posts.find({ $and: [{ private: false }, { userId: this.userId }] }).count();
+  if (limit > count) {
+    limit = count;
+  }
+  return Posts.find({ $and: [{ private: false }, { userId: this.userId }] }, { limit });
 });
