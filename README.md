@@ -10,3 +10,7 @@
 `meteor npm install`
 4. Start meteor app  
 `meteor`
+
+App will create 5 user accounts that you can use to log in.
+* username: user[1-5]
+* password: postme
