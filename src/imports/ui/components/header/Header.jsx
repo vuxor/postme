@@ -1,25 +1,24 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes } from 'react';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import AccountsUIWrapper from '../accounts/AccountsUIWrapper.jsx';
 
-export default class Header extends Component {
-
-  render() {
-    return (
+const Header = (props) => (
+  <div>
+    <AccountsUIWrapper />
+    <button onClick={() => FlowRouter.go('posts.public.best')}>Hall of fame</button>
+    <button onClick={() => FlowRouter.go('home')}>Home</button>
+    {props.currentUser &&
       <div>
-        <AccountsUIWrapper />
-        {this.props.currentUser &&
-          <div>
-            <button onClick={() => FlowRouter.go('/profile')}>Profile</button>
-            <button onClick={() => FlowRouter.go('/posts')}>Posts</button>
-          </div>
-        }
+        <button onClick={() => FlowRouter.go('profile')}>Profile</button>
+        <button onClick={() => FlowRouter.go('posts')}>My posts</button>
       </div>
-    );
-  }
-}
+    }
+  </div>
+);
 
 Header.propTypes = {
   currentUser: PropTypes.object,
 };
+
+export default Header;

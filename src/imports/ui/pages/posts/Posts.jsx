@@ -1,19 +1,16 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes } from 'react';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-export default class Posts extends Component {
-  render() {
-    return (
-      <div>
-        <button>Add new post</button>
-        <button onClick={() => FlowRouter.go('posts.public')}>Public posts</button>
-        <button onClick={() => FlowRouter.go('posts.private')}>Private posts</button>
-        <button onClick={() => FlowRouter.go('posts.public.best')}>Hall of fame</button>
-      </div>
-    );
-  }
-}
+const Posts = () => (
+  <div>
+    <button>Add new post</button>
+    <button onClick={() => FlowRouter.go('posts.public')}>Public posts</button>
+    <button onClick={() => FlowRouter.go('posts.private')}>Private posts</button>
+  </div>
+);
 
 Posts.propTypes = {
   currentUser: PropTypes.object,
 };
+
+export default Posts;
