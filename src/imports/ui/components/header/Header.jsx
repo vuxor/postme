@@ -11,6 +11,7 @@ const Header = (props) => (
     {props.currentUser &&
       <div>
         <button onClick={() => FlowRouter.go('profile')}>Profile</button>
+        {/* this should be dropdown menu */}
         <button onClick={() => FlowRouter.go('posts')}>My posts</button>
       </div>
     }
