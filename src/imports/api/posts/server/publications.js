@@ -17,8 +17,8 @@ Meteor.publish('Posts.public', (l = 10) => {
     users,
   ];
 });
-
-Meteor.publish('Posts.user.public', function userPublic(l = 10) {
+// eslint-disable-next-line func-names
+Meteor.publish('Posts.user.public', function (l = 10) {
   check(l, Number);
   let limit = l;
   const count = Posts.find({ $and: [{ private: false }, { userId: this.userId }] }).count();
