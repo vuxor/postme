@@ -7,12 +7,16 @@ export default class PostList extends React.Component {
       listData: [],
     };
   }
-
   componentWillReceiveProps(nextProps) {
     const newList = this.state.listData.concat(nextProps.posts);
     this.setState({
       listData: newList,
     });
+  }
+  componentWillUnmount() {
+    // this will remove duplication of data
+    // when switch from best to home and oposite
+    this.props.handle.stop();
   }
   render() {
     const { loading } = this.props;
@@ -35,7 +39,8 @@ export default class PostList extends React.Component {
 }
 
 PostList.propTypes = {
-  posts: PropTypes.array,
-  users: PropTypes.array,
-  loading: PropTypes.bool,
+  posts: PropTypes.array.isRequired,
+  users: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  handle: PropTypes.object.isRequired,
 };

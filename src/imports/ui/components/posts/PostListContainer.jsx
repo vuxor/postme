@@ -5,16 +5,17 @@ import PostList from './PostList.jsx';
 import { Posts } from '../../../api/posts/posts.js';
 
 export default createContainer((params) => {
-  const handle = Meteor.subscribe(params.sub, params.limit);
+  const { sub, limit, skip } = params;
+  const handle = Meteor.subscribe(sub, limit);
   const loading = !handle.ready();
   let posts = [];
   let users = [];
   if (!loading) {
     posts = Posts.find({}, {
-      skip: params.skip,
+      skip,
     }).fetch();
     users = Meteor.users.find().fetch();
-    if (Posts.find().count() < params.limit) {
+    if (Posts.find().count() < limit) {
       params.hitLimitFunc();
     }
   }
@@ -22,5 +23,6 @@ export default createContainer((params) => {
     posts,
     users,
     loading,
+    handle,
   };
 }, PostList);
