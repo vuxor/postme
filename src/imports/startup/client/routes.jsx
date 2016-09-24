@@ -22,6 +22,10 @@ FlowRouter.route('/', {
 FlowRouter.route('/profile', {
   name: 'profile',
   action() {
+    if (!Meteor.userId()) {
+      FlowRouter.go('home');
+      return;
+    }
     mount(MainLayout, {
       main: <ProfileContainer />,
     });

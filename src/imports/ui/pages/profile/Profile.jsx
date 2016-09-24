@@ -1,10 +1,14 @@
 import React, { PropTypes, Component } from 'react';
 import { Gravatar } from 'meteor/jparker:gravatar';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.gravatar = this.gravatar.bind(this);
+  }
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.currentUser) FlowRouter.go('home');
   }
   gravatar() {
     if (this.props.currentUser.emails) {
