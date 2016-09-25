@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Random } from 'meteor/random';
 import { faker } from 'meteor/practicalmeteor:faker';
 import { Accounts } from 'meteor/accounts-base';
 
@@ -30,6 +31,7 @@ Meteor.startup(() => {
       const comments = [];
       for (let j = 0; j < faker.random.number(5); j++) {
         comments.push({
+          _id: Random.id(),
           user: faker.random.arrayElement(usernames),
           createdAt: new Date(),
           text: faker.lorem.sentence(),
