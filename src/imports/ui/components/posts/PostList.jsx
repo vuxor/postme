@@ -63,7 +63,7 @@ export default class PostList extends React.Component {
     const currUser = this.props.users.find(user => user._id === userId);
     // this will remove errors in console but
     // it will cause flickering usernames
-    return currUser ? currUser.username : '';
+    return currUser && currUser.username;
   }
   comments(post) {
     const num = post.comments.length;
