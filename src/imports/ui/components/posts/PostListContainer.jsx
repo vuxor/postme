@@ -20,5 +20,6 @@ export default createContainer((params) => {
     posts,
     handle,
     skip,
+    currentUser: Meteor.user(),
   };
 }, PostList);

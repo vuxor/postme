@@ -8,6 +8,8 @@ export default class PostListItem extends Component {
     this.canModify = this.canModify.bind(this);
     this.canVote = this.canVote.bind(this);
     this.votePost = this.votePost.bind(this);
+    this.isVoted = this.isVoted.bind(this);
+    this.ownPost = this.ownPost.bind(this);
   }
   canModify() {
     if (Meteor.userId()) {
@@ -38,8 +40,20 @@ export default class PostListItem extends Component {
         }
       });
     } else {
-      console.log('you must logi in first');
+      console.log('you must login first');
     }
+  }
+  isVoted(currentUser = this.props.currentUser) {
+    if (!!currentUser) {
+      if (this.props.post.voters.indexOf(currentUser._id) > -1) return true;
+    }
+    return false;
+  }
+  ownPost(currentUser = this.props.currentUser) {
+    if (!!currentUser) {
+      if (currentUser.username === this.props.post.owner) return true;
+    }
+    return false;
   }
   render() {
     const post = this.props.post;
@@ -55,7 +69,7 @@ export default class PostListItem extends Component {
               <button>Delete</button>
             </span>
           },
-          <button onClick={this.votePost}>Vote</button>
+          {(!this.isVoted() && !this.ownPost()) && <button onClick={this.votePost}>Vote</button>}
         </p>
         <div>{Meteor.userId() && <button>Discuss</button>}</div>
       </div>
@@ -65,4 +79,5 @@ export default class PostListItem extends Component {
 
 PostListItem.propTypes = {
   post: PropTypes.object.isRequired,
+  currentUser: PropTypes.object,
 };

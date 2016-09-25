@@ -38,7 +38,7 @@ export default class PostList extends React.Component {
   render() {
     const itemList = (
       this.state.listData.map(post =>
-        <PostListItem key={post._id} post={post} />
+        <PostListItem key={post._id} post={post} currentUser={this.props.currentUser} />
       )
     );
     return (
@@ -53,4 +53,5 @@ PostList.propTypes = {
   posts: PropTypes.array.isRequired,
   handle: PropTypes.object.isRequired,
   skip: PropTypes.number.isRequired,
+  currentUser: PropTypes.object,
 };

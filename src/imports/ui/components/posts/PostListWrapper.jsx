@@ -49,7 +49,7 @@ export default class PostListWrapper extends Component {
           limit={this.state.limit}
           sub={this.props.sub}
         />
-        {!this.state.hitLimit && !this.state.loading &&
+        {(!this.state.hitLimit && !this.state.loading) &&
           <button onClick={() => this.setParams()}>Load more</button>
         }
         {this.state.loading && 'Loading...'}
