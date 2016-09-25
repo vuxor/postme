@@ -24,8 +24,6 @@ Meteor.startup(() => {
   }
   if (Posts.find().count() < 100) {
     const users = Meteor.users.find();
-    // eslint-disable-next-line no-underscore-dangle
-    const userIds = users.map((user) => user._id);
     const usernames = users.map((user) => user.username);
 
     const makeComments = () => {
@@ -42,7 +40,7 @@ Meteor.startup(() => {
 
     for (let i = 1; i <= 100; i++) {
       Posts.insert({
-        userId: faker.random.arrayElement(userIds),
+        owner: faker.random.arrayElement(usernames),
         title: faker.lorem.sentence(),
         text: faker.lorem.paragraph(),
         url: faker.internet.url(),
