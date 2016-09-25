@@ -18,7 +18,6 @@ export default createContainer((params) => {
   }
   return {
     posts,
-    loading,
     handle,
     skip,
   };
