@@ -9,13 +9,7 @@ Meteor.publish('Posts.public', (l = 10) => {
   if (limit > count) {
     limit = count;
   }
-  const publicPosts = Posts.find({ private: false }, { sort: { createdAt: -1 }, limit });
-  const userIds = publicPosts.map((post) => post.userId);
-  const users = Meteor.users.find({ _id: { $in: userIds } }, { fields: { username: 1 } });
-  return [
-    publicPosts,
-    users,
-  ];
+  return Posts.find({ private: false }, { sort: { createdAt: -1 }, limit });
 });
 Meteor.publish('Posts.best', (l = 10) => {
   check(l, Number);
@@ -24,31 +18,27 @@ Meteor.publish('Posts.best', (l = 10) => {
   if (limit > count) {
     limit = count;
   }
-  const bestPosts = Posts.find({ private: false }, { sort: { votes: -1 }, limit });
-  const userIds = bestPosts.map((post) => post.userId);
-  const users = Meteor.users.find({ _id: { $in: userIds } }, { fields: { username: 1 } });
-  return [
-    bestPosts,
-    users,
-  ];
+  return Posts.find({ private: false }, { sort: { votes: -1 }, limit });
 });
 // eslint-disable-next-line func-names
 Meteor.publish('Posts.user.public', function (l = 10) {
   check(l, Number);
   let limit = l;
-  const count = Posts.find({ $and: [{ private: false }, { userId: this.userId }] }).count();
+  const username = Meteor.users.findOne(this.userId).username;
+  const count = Posts.find({ $and: [{ private: false }, { owner: username }] }).count();
   if (limit > count) {
     limit = count;
   }
-  return Posts.find({ $and: [{ private: false }, { userId: this.userId }] }, { limit });
+  return Posts.find({ $and: [{ private: false }, { owner: username }] }, { limit });
 });
 // eslint-disable-next-line func-names
 Meteor.publish('Posts.user.private', function (l = 10) {
   check(l, Number);
   let limit = l;
-  const count = Posts.find({ $and: [{ private: true }, { userId: this.userId }] }).count();
+  const username = Meteor.users.findOne(this.userId).username;
+  const count = Posts.find({ $and: [{ private: true }, { owner: username }] }).count();
   if (limit > count) {
     limit = count;
   }
-  return Posts.find({ $and: [{ private: true }, { userId: this.userId }] }, { limit });
+  return Posts.find({ $and: [{ private: true }, { owner: username }] }, { limit });
 });
