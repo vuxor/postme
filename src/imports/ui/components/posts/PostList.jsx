@@ -9,7 +9,6 @@ export default class PostList extends React.Component {
     this.state = {
       listData: [],
     };
-    this.comments = this.comments.bind(this);
   }
   componentWillReceiveProps(nextProps) {
     let listData = [];
@@ -26,14 +25,6 @@ export default class PostList extends React.Component {
     // this will remove duplication of data
     // when switch from best to home and oposite
     this.props.handle.stop();
-  }
-  comments(post) {
-    const num = post.comments.length;
-    if (num) {
-      if (num === 1) return '1 comment';
-      return `${post.comments.length} comments`;
-    }
-    return 'no comments';
   }
   render() {
     const itemList = (
