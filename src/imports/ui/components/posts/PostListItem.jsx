@@ -2,21 +2,20 @@
 import React, { Component, PropTypes } from 'react';
 import { vote } from '../../../api/posts/methods.js';
 
+import CommentsWrapper from '../comments/CommentsWrapper.jsx';
+
 export default class PostListItem extends Component {
   constructor(props) {
     super(props);
-    this.canModify = this.canModify.bind(this);
+    this.state = {
+      showComments: false,
+    };
     this.canVote = this.canVote.bind(this);
     this.votePost = this.votePost.bind(this);
     this.isVoted = this.isVoted.bind(this);
     this.ownPost = this.ownPost.bind(this);
     this.numberOfComments = this.numberOfComments.bind(this);
-  }
-  canModify() {
-    if (Meteor.userId()) {
-      if (this.props.post.owner === Meteor.user().username) return true;
-    }
-    return false;
+    this.showComments = this.showComments.bind(this);
   }
   canVote() {
     const post = this.props.post;
@@ -58,12 +57,18 @@ export default class PostListItem extends Component {
   }
   numberOfComments(post = this.props.post) {
     const num = post.comments.length;
-    let text;
+    let text = 'no comments';
     if (num) {
-      if (num === 1) text = '1 comment';
-      text = `${post.comments.length} comments`;
+      if (num === 1) {
+        text = '1 comment';
+      } else {
+        text = `${post.comments.length} comments`;
+      }
     }
     return text;
+  }
+  showComments() {
+    this.setState({ showComments: !this.state.showComments });
   }
   render() {
     const post = this.props.post;
@@ -73,7 +78,7 @@ export default class PostListItem extends Component {
         <p>
           votes: {post.votes},
           {this.numberOfComments()},
-          {this.canModify() &&
+          {this.ownPost() &&
             <span>
               <button>Edit</button>
               <button>Delete</button>
@@ -81,7 +86,9 @@ export default class PostListItem extends Component {
           },
           {(!this.isVoted() && !this.ownPost()) && <button onClick={this.votePost}>Vote</button>}
         </p>
-        <div>{Meteor.userId() && <button>Discuss</button>}</div>
+        <div>{<button onClick={this.showComments}>Discuss</button>}</div>
+        {this.state.showComments &&
+          <CommentsWrapper {...this.props} />}
       </div>
     );
   }
