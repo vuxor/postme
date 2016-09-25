@@ -32,7 +32,7 @@ Meteor.startup(() => {
         comments.push({
           user: faker.random.arrayElement(usernames),
           createdAt: new Date(),
-          title: faker.lorem.sentence(),
+          text: faker.lorem.sentence(),
         });
       }
       return comments;
