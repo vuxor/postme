@@ -27,14 +27,11 @@ export default class PostList extends React.Component {
     this.props.handle.stop();
   }
   render() {
-    const itemList = (
-      this.state.listData.map(post =>
-        <PostListItem key={post._id} post={post} currentUser={this.props.currentUser} />
-      )
-    );
     return (
       <div>
-        {itemList}
+        {this.state.listData.map(post =>
+          <PostListItem key={post._id} post={post} currentUser={this.props.currentUser} />
+        )}
       </div>
     );
   }
