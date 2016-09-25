@@ -10,6 +10,7 @@ export default class PostListItem extends Component {
     this.votePost = this.votePost.bind(this);
     this.isVoted = this.isVoted.bind(this);
     this.ownPost = this.ownPost.bind(this);
+    this.numberOfComments = this.numberOfComments.bind(this);
   }
   canModify() {
     if (Meteor.userId()) {
@@ -55,6 +56,15 @@ export default class PostListItem extends Component {
     }
     return false;
   }
+  numberOfComments(post = this.props.post) {
+    const num = post.comments.length;
+    let text;
+    if (num) {
+      if (num === 1) text = '1 comment';
+      text = `${post.comments.length} comments`;
+    }
+    return text;
+  }
   render() {
     const post = this.props.post;
     return (
@@ -62,7 +72,7 @@ export default class PostListItem extends Component {
         <p><span>{post.title} - {post.owner}</span></p>
         <p>
           votes: {post.votes},
-          {/* {this.comments(post)}, */}
+          {this.numberOfComments()},
           {this.canModify() &&
             <span>
               <button>Edit</button>
