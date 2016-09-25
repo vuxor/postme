@@ -22,10 +22,6 @@ FlowRouter.route('/', {
 FlowRouter.route('/profile', {
   name: 'profile',
   action() {
-    if (!Meteor.userId()) {
-      FlowRouter.go('home');
-      return;
-    }
     mount(MainLayout, {
       main: <ProfileContainer />,
     });
@@ -44,10 +40,6 @@ FlowRouter.route('/posts', {
 FlowRouter.route('/posts/public', {
   name: 'posts.public',
   action() {
-    if (!Meteor.userId()) {
-      FlowRouter.go('home');
-      return;
-    }
     mount(MainLayout, {
       main: <UserPublicPosts />,
     });
@@ -57,10 +49,6 @@ FlowRouter.route('/posts/public', {
 FlowRouter.route('/posts/private', {
   name: 'posts.private',
   action() {
-    if (!Meteor.userId()) {
-      FlowRouter.go('home');
-      return;
-    }
     mount(MainLayout, {
       main: <UserPrivatePosts />,
     });
