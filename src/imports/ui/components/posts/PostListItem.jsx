@@ -10,25 +10,36 @@ export default class PostListItem extends Component {
     this.votePost = this.votePost.bind(this);
   }
   canModify() {
-    return this.props.post.owner === Meteor.user().username;
+    if (Meteor.userId()) {
+      if (this.props.post.owner === Meteor.user().username) return true;
+    }
+    return false;
   }
   canVote() {
     const post = this.props.post;
     let youCanVote = true;
     if (post.private) youCanVote = false;
-    if (post.owner === Meteor.user().username) youCanVote = false;
-    if (post.voters.indexOf(Meteor.userId()) > -1) youCanVote = false;
+    if (Meteor.userId()) {
+      if (post.owner === Meteor.user().username) youCanVote = false;
+      if (post.voters.indexOf(Meteor.userId()) > -1) youCanVote = false;
+    } else {
+      youCanVote = false;
+    }
 
     return youCanVote;
   }
   votePost(e, postId = this.props.post._id) {
-    vote.call({
-      postId,
-    }, (err) => {
-      if (err) {
-        // handle the error here
-      }
-    });
+    if (this.canVote()) {
+      vote.call({
+        postId,
+      }, (err) => {
+        if (err) {
+          // handle the error here
+        }
+      });
+    } else {
+      console.log('you must logi in first');
+    }
   }
   render() {
     const post = this.props.post;
@@ -44,9 +55,9 @@ export default class PostListItem extends Component {
               <button>Delete</button>
             </span>
           },
-          {this.canVote() && <button onClick={this.votePost}>Vote</button>}
+          <button onClick={this.votePost}>Vote</button>
         </p>
-        <div>{Meteor.userId() ? 'you can add comments' : 'Please login to add comments'}</div>
+        <div>{Meteor.userId() && <button>Discuss</button>}</div>
       </div>
     );
   }
