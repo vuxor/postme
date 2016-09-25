@@ -8,6 +8,7 @@ export default createContainer((params) => {
   const { sub, limit, skip } = params;
   const handle = Meteor.subscribe(sub, limit);
   const loading = !handle.ready();
+  params.loadingFunc(loading);
   let posts = [];
   if (!loading) {
     posts = Posts.find().fetch();

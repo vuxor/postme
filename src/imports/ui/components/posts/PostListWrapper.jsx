@@ -9,10 +9,12 @@ export default class PostListWrapper extends Component {
       limit: 10,
       skip: 0,
       hitLimit: false,
+      loading: true,
     };
     this.increment = this.increment.bind(this);
     this.setParams = this.setParams.bind(this);
     this.hitLimitHandle = this.hitLimitHandle.bind(this);
+    this.loadingHandle = this.loadingHandle.bind(this);
   }
   componentWillMount() {
     this.setState({
@@ -34,18 +36,23 @@ export default class PostListWrapper extends Component {
       hitLimit: true,
     });
   }
+  loadingHandle(loading) {
+    this.setState({ loading });
+  }
   render() {
     return (
       <div>
         <PostListContainer
           hitLimitFunc={this.hitLimitHandle}
+          loadingFunc={this.loadingHandle}
           skip={this.state.skip}
           limit={this.state.limit}
           sub={this.props.sub}
         />
-        {!this.state.hitLimit &&
+        {!this.state.hitLimit && !this.state.loading &&
           <button onClick={() => this.setParams()}>Load more</button>
         }
+        {this.state.loading && 'Loading...'}
       </div>
     );
   }
