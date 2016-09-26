@@ -4,7 +4,16 @@ import { newComment } from '../../../api/posts/methods.js';
 export default class NewCommentForm extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      comment: '',
+    };
     this.postNewComment = this.postNewComment.bind(this);
+    this.handleTextChange = this.handleTextChange.bind(this);
+  }
+  handleTextChange(e) {
+    this.setState({
+      comment: e.target.value,
+    });
   }
   postNewComment(e) {
     e.preventDefault();
@@ -22,9 +31,34 @@ export default class NewCommentForm extends Component {
   }
   render() {
     return (
-      <form onSubmit={this.postNewComment}>
-        <label>Comment:</label><input id="newCommentText" type="text" required />
-        <button type="submit">Submit</button>
+      <form className="new-comment-form" onSubmit={this.postNewComment}>
+        <div className="row">
+          <div className="input-field col s12">
+            <input
+              id="newCommentText"
+              type="text"
+              className="validate"
+              value={this.state.comment}
+              onChange={this.handleTextChange}
+              required
+            />
+            <label htmlFor="newCommentText">
+              Comment
+            </label>
+          </div>
+        </div>
+        <div className="row">
+          <div className="input-field col s12">
+            <button
+              className="btn waves-effect waves-light"
+              type="submit"
+              name="action"
+            >
+              Submit
+              <i className="material-icons right">send</i>
+            </button>
+          </div>
+        </div>
       </form>
     );
   }

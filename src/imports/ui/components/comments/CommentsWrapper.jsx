@@ -5,7 +5,7 @@ import Comment from './Comment.jsx';
 import NewCommentForm from './NewCommentForm.jsx';
 
 const CommentsWrapper = (props) => (
-  <div>
+  <div className="comments-wrapper row">
     {props.post.comments.map(comment =>
       <Comment key={comment._id} comment={comment} />
     )}

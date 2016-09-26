@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react';
 
 const Comment = (props) => (
-  <div>
-    {props.comment.user}, on
-    <p>{props.comment.text}</p>
+  <div className="card-panel">
+    <div className="comment-header">{props.comment.user}, on</div>
+    <div className="comment-body">{props.comment.text}</div>
   </div>
 );
 
