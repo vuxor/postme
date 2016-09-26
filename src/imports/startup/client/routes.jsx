@@ -5,7 +5,6 @@ import { mount } from 'react-mounter';
 import MainLayout from '../../ui/layouts/MainLayout.jsx';
 import Home from '../../ui/pages/home/Home.jsx';
 import ProfileContainer from '../../ui/pages/profile/ProfileContainer.jsx';
-import Posts from '../../ui/pages/posts/Posts.jsx';
 import UserPublicPosts from '../../ui/pages/posts/public/UserPublicPosts.jsx';
 import UserPrivatePosts from '../../ui/pages/posts/private/UserPrivatePosts.jsx';
 import UsersBestPosts from '../../ui/pages/posts/best/UsersBestPosts.jsx';
@@ -24,15 +23,6 @@ FlowRouter.route('/profile', {
   action() {
     mount(MainLayout, {
       main: <ProfileContainer />,
-    });
-  },
-});
-
-FlowRouter.route('/posts', {
-  name: 'posts',
-  action() {
-    mount(MainLayout, {
-      main: <Posts />,
     });
   },
 });
