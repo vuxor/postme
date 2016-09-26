@@ -17,9 +17,6 @@ export default class PostListItem extends Component {
     this.numberOfComments = this.numberOfComments.bind(this);
     this.showComments = this.showComments.bind(this);
   }
-  componentDidMount() {
-    $('.modal-trigger').leanModal();
-  }
   canVote() {
     const post = this.props.post;
     let youCanVote = true;
@@ -89,16 +86,6 @@ export default class PostListItem extends Component {
           },
           {(!this.isVoted() && !this.ownPost()) && <button onClick={this.votePost}>Vote</button>}
         </p>
-
-        <div id="postModal" className="modal">
-          <div className="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
-          </div>
-          <div className="modal-footer">
-            <a href="#!" className=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-          </div>
-        </div>
 
         <div>{<button onClick={this.showComments}>Discuss</button>}</div>
         {this.state.showComments &&
