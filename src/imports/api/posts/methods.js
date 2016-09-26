@@ -23,6 +23,35 @@ export const vote = new ValidatedMethod({
   },
 });
 
+export const insertPost = new ValidatedMethod({
+  name: 'posts.insert',
+  validate: new SimpleSchema({
+    postData: { type: Object },
+    'postData.title': { type: String },
+    'postData.text': { type: String },
+    'postData.url': { type: String },
+    'postData.isPrivate': { type: Boolean },
+  }).validator(),
+  run({ postData }) {
+    if (!this.userId) {
+      throw new Meteor.Error('not-authorized',
+        'You must be loged in to preform this action');
+    }
+
+    Posts.insert({
+      title: postData.title,
+      text: postData.text,
+      url: postData.url,
+      isPrivate: postData.isPrivate,
+      owner: Meteor.users.findOne(this.userId).username,
+      votes: 0,
+      voters: [],
+      comments: [],
+      createdAt: new Date(),
+    });
+  },
+});
+
 export const newComment = new ValidatedMethod({
   name: 'posts.newComment',
   validate: new SimpleSchema({
