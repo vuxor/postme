@@ -24,12 +24,14 @@ const Header = (props) => {
     );
   }
   return (
-    <nav className="main-nav">
-      <div className="nav-wrapper">
-        <a onClick={() => FlowRouter.go('home')} className="brand-logo">Postme</a>
-        {list}
-      </div>
-    </nav>
+    <div className="navbar-fixed">
+      <nav className="main-nav">
+        <div className="nav-wrapper">
+          <a onClick={() => FlowRouter.go('home')} className="brand-logo">Postme</a>
+          {list}
+        </div>
+      </nav>
+    </div>
   );
 };
 
