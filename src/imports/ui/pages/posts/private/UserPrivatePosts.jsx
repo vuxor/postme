@@ -16,7 +16,7 @@ class UserPrivatePosts extends Component {
       <div>
         <PostListWrapper
           perPage={5}
-          sub={'Posts.user.public'}
+          sub={'Posts.user.private'}
         />
       </div>
     );
