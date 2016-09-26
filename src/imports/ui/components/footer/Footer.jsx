@@ -6,15 +6,11 @@ export default class Footer extends Component {
   showModal() {
     $('#postModal').openModal();
   }
-  componentDidMount() {
-    $('.modal-trigger').leanModal();
-  }
   render() {
     return (
       <div>
         <a
-          href="#postModal"
-          // onClick={this.showModal}
+          onClick={this.showModal}
           className="modal-trigger btn-floating btn-large waves-effect waves-light red"
         >
           <i className="material-icons">add</i>
