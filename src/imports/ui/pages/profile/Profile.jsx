@@ -24,18 +24,33 @@ export default class Profile extends Component {
     if (currentUser) {
       userData = (
         <div>
-          <div><img alt="Avatar" src={this.gravatar()} /></div>
-          <div>
-            <p>Email: <span>{currentUser.emails && currentUser.emails[0].address}</span></p>
-            <p>Username: <span>{currentUser.username}</span></p>
-            <p>First Name: <span>{currentUser.firstName ? currentUser.firstName : '-'}</span></p>
-            <p>Last Name: <span>{currentUser.lastName ? currentUser.lastName : '-'}</span></p>
+          <div className="gravatar"><img alt="Avatar" src={this.gravatar()} /></div>
+          <hr />
+          <div className="profile-details">
+            <ul className="collection">
+              <li className="collection-item">
+                <span><b>Email:&nbsp;</b></span>
+                <span>{currentUser.emails && currentUser.emails[0].address}</span>
+              </li>
+              <li className="collection-item">
+                <span><b>Username:&nbsp;</b></span>
+                <span>{currentUser.username}</span>
+              </li>
+              <li className="collection-item">
+                <span><b>First Name:&nbsp;</b></span>
+                <span>{currentUser.firstName ? currentUser.firstName : '-'}</span>
+              </li>
+              <li className="collection-item">
+                <span><b>Last Name:&nbsp;</b></span>
+                <span>{currentUser.lastName ? currentUser.lastName : '-'}</span>
+              </li>
+            </ul>
           </div>
         </div>
       );
     }
     return (
-      <div>
+      <div className="profile-data">
         {Meteor.loggingIn() ? 'Loading...' : userData}
       </div>
     );
