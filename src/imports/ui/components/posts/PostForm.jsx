@@ -11,9 +11,21 @@ export default class PostForm extends Component {
       postText: '',
       postUrl: '',
       postIsPrivate: false,
+      active: false,
     };
     this.savePost = this.savePost.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
+  }
+  componentWillMount(post = this.props.post) {
+    if (!!post) {
+      this.setState({
+        postTitle: post.title,
+        postText: post.text,
+        postUrl: post.url,
+        postIsPrivate: post.isPrivate,
+        active: true,
+      });
+    }
   }
   handleFormChange(e) {
     const element = e.target;
@@ -61,10 +73,7 @@ export default class PostForm extends Component {
         if (err) {
           Materialize.toast(err.reason, 4000);
         }
-        title.value = '';
-        text.value = '';
-        url.value = '';
-        isPrivate.checked = false;
+        this.props.hideForm();
         Materialize.toast('You successufully updated post', 4000);
       });
     } else {
@@ -93,11 +102,11 @@ export default class PostForm extends Component {
                 id="postTitle"
                 type="text"
                 className="validate"
-                value={this.state.title}
+                value={this.state.postTitle}
                 onChange={this.handleFormChange}
                 required
               />
-              <label htmlFor="postTitle">
+              <label htmlFor="postTitle" className={this.state.active && 'active'}>
                 Title
               </label>
             </div>
@@ -105,13 +114,13 @@ export default class PostForm extends Component {
           <div className="row">
             <div className="input-field col s12">
               <textarea
-                value={this.state.text}
+                value={this.state.postText}
                 onChange={this.handleFormChange}
                 id="postText"
                 className="materialize-textarea"
               >
               </textarea>
-              <label htmlFor="postText">Text</label>
+              <label htmlFor="postText" className={this.state.active && 'active'}>Text</label>
             </div>
           </div>
           <div className="row">
@@ -120,11 +129,11 @@ export default class PostForm extends Component {
                 id="postUrl"
                 type="text"
                 className="validate"
-                value={this.state.url}
+                value={this.state.postUrl}
                 onChange={this.handleFormChange}
                 required
               />
-              <label htmlFor="postUrl">
+              <label htmlFor="postUrl" className={this.state.active && 'active'}>
                 URL
               </label>
             </div>
@@ -132,7 +141,7 @@ export default class PostForm extends Component {
           <div className="row">
             <div className="input-field col s12">
               <input
-                checked={this.state.isPrivate}
+                checked={this.state.postIsPrivate}
                 type="checkbox"
                 id="postIsPrivate"
                 onClick={this.handleFormChange}
@@ -160,4 +169,5 @@ export default class PostForm extends Component {
 
 PostForm.propTypes = {
   post: PropTypes.object,
+  hideForm: PropTypes.func,
 };

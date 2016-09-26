@@ -104,7 +104,7 @@ export default class PostListItem extends Component {
         <div>{<button onClick={this.showComments}>Discuss</button>}</div>
         {this.state.showComments &&
           <CommentsWrapper {...this.props} />}
-        {this.state.showForm && <PostForm post={post} />}
+        {this.state.showForm && <PostForm post={post} hideForm={this.showUpdateForm} />}
       </div>
     );
   }
