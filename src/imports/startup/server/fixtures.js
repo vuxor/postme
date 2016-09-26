@@ -47,7 +47,7 @@ Meteor.startup(() => {
         text: faker.lorem.paragraph(),
         url: faker.internet.url(),
         votes: faker.random.number(100),
-        private: faker.random.boolean(),
+        isPrivate: faker.random.boolean(),
         createdAt: new Date(),
         voters: [],
         comments: makeComments(),
