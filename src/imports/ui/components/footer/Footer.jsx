@@ -30,8 +30,8 @@ export default class Footer extends Component {
 
         <div id="postModal" className="modal">
           <div className="row">
-            <div className="col s12">
-              <h3>Add new post</h3>
+            <div className="header-wrapper col s12">
+              <h2 className="header">Add new post</h2>
             </div>
           </div>
           <PostForm post={null} />
