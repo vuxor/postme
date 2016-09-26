@@ -1,6 +1,7 @@
 /* eslint no-underscore-dangle: 0 */
 import React, { Component, PropTypes } from 'react';
 import { vote } from '../../../api/posts/methods.js';
+import { Materialize } from 'meteor/materialize:materialize';
 
 import CommentsWrapper from '../comments/CommentsWrapper.jsx';
 import PostForm from './PostForm.jsx';
@@ -39,11 +40,11 @@ export default class PostListItem extends Component {
         postId,
       }, (err) => {
         if (err) {
-          // handle the error here
+          Materialize.toast(err.reason, 4000);
         }
       });
     } else {
-      console.log('you must login first');
+      Materialize.toast('You must login first', 4000);
     }
   }
   isVoted(currentUser = this.props.currentUser) {
