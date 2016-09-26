@@ -55,6 +55,7 @@ export default class PostForm extends Component {
     }
   }
   savePost(e, post = this.props.post) {
+    console.log(post._id);
     e.preventDefault();
     const title = document.getElementById('postTitle');
     const text = document.getElementById('postText');
@@ -144,7 +145,7 @@ export default class PostForm extends Component {
                 checked={this.state.postIsPrivate}
                 type="checkbox"
                 id="postIsPrivate"
-                onClick={this.handleFormChange}
+                onChange={this.handleFormChange}
               />
               <label htmlFor="postIsPrivate">Private</label>
             </div>
