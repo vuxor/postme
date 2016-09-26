@@ -24,7 +24,7 @@ const Header = (props) => {
     );
   }
   return (
-    <nav>
+    <nav className="main-nav">
       <div className="nav-wrapper">
         <a onClick={() => FlowRouter.go('home')} className="brand-logo">Postme</a>
         {list}
