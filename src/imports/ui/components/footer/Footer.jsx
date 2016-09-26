@@ -34,7 +34,7 @@ export default class Footer extends Component {
               <h3>Add new post</h3>
             </div>
           </div>
-          <PostForm />
+          <PostForm post={null} />
         </div>
       </div>
     );
