@@ -1,5 +1,11 @@
 .comments-wrapper {
   padding-left: 3rem;
+  .comment-header {
+    font-size: .9rem;
+  }
+  .comment-body {
+    font-size: 1.1rem;
+  }
   .new-comment-form {
     padding: 1rem;
   }
