@@ -3,20 +3,35 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import AccountsUIWrapper from '../accounts/AccountsUIWrapper.jsx';
 
-const Header = (props) => (
-  <div>
-    <AccountsUIWrapper />
-    <button onClick={() => FlowRouter.go('posts.public.best')}>Hall of fame</button>
-    <button onClick={() => FlowRouter.go('home')}>Home</button>
-    {props.currentUser &&
-      <div>
-        <button onClick={() => FlowRouter.go('profile')}>Profile</button>
-        {/* this should be dropdown menu */}
-        <button onClick={() => FlowRouter.go('posts')}>My posts</button>
+const Header = (props) => {
+  let list;
+  if (props.currentUser) {
+    list = (
+      <ul id="nav-mobile" className="right hide-on-med-and-down">
+        <li><a onClick={() => FlowRouter.go('posts.public.best')}>Hall of fame</a></li>
+        <li><a onClick={() => FlowRouter.go('profile')}>Profile</a></li>
+        <li><a onClick={() => FlowRouter.go('posts.public')}>Public posts</a></li>
+        <li><a onClick={() => FlowRouter.go('posts.private')}>Private posts</a></li>
+        <li><a><AccountsUIWrapper /></a></li>
+      </ul>
+    );
+  } else {
+    list = (
+      <ul id="nav-mobile" className="right hide-on-med-and-down">
+        <li><a onClick={() => FlowRouter.go('posts.public.best')}>Hall of fame</a></li>
+        <li><a><AccountsUIWrapper /></a></li>
+      </ul>
+    );
+  }
+  return (
+    <nav>
+      <div className="nav-wrapper">
+        <a onClick={() => FlowRouter.go('home')} className="brand-logo">Postme</a>
+        {list}
       </div>
-    }
-  </div>
-);
+    </nav>
+  );
+};
 
 Header.propTypes = {
   currentUser: PropTypes.object,
