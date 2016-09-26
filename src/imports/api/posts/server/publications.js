@@ -29,7 +29,18 @@ Meteor.publish('Posts.user.public', function (l = 10) {
   if (limit > count) {
     limit = count;
   }
-  return Posts.find({ $and: [{ isPrivate: false }, { owner: username }] }, { limit });
+  return Posts.find({
+    $and: [{
+      isPrivate: false,
+    }, {
+      owner: username,
+    }],
+  }, {
+    sort: {
+      createdAt: -1,
+    },
+    limit,
+  });
 });
 // eslint-disable-next-line func-names
 Meteor.publish('Posts.user.private', function (l = 10) {
@@ -40,5 +51,16 @@ Meteor.publish('Posts.user.private', function (l = 10) {
   if (limit > count) {
     limit = count;
   }
-  return Posts.find({ $and: [{ isPrivate: true }, { owner: username }] }, { limit });
+  return Posts.find({
+    $and: [{
+      isPrivate: true,
+    }, {
+      owner: username,
+    }],
+  }, {
+    sort: {
+      createdAt: -1,
+    },
+    limit,
+  });
 });
