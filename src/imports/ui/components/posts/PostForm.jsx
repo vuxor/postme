@@ -6,14 +6,48 @@ import { Materialize } from 'meteor/materialize:materialize';
 export default class PostForm extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      postTitle: '',
+      postText: '',
+      postUrl: '',
+      postIsPrivate: false,
+    };
     this.savePost = this.savePost.bind(this);
+    this.handleFormChange = this.handleFormChange.bind(this);
+  }
+  handleFormChange(e) {
+    const element = e.target;
+    switch (element.id) {
+      case 'postTitle':
+        this.setState({
+          postTitle: element.value,
+        });
+        break;
+      case 'postText':
+        this.setState({
+          postText: element.value,
+        });
+        break;
+      case 'postUrl':
+        this.setState({
+          postUrl: element.value,
+        });
+        break;
+      case 'postIsPrivate':
+        this.setState({
+          postIsPrivate: element.checked,
+        });
+        break;
+      default:
+        Materialize.toast('Unknown id', 4000);
+    }
   }
   savePost(e, post = this.props.post) {
     e.preventDefault();
     const title = document.getElementById('postTitle');
     const text = document.getElementById('postText');
     const url = document.getElementById('postUrl');
-    const isPrivate = document.getElementById('postPrivate');
+    const isPrivate = document.getElementById('postIsPrivate');
     const postData = {};
     postData.title = title.value.trim();
     postData.text = text.value.trim();
@@ -59,6 +93,8 @@ export default class PostForm extends Component {
                 id="postTitle"
                 type="text"
                 className="validate"
+                value={this.state.title}
+                onChange={this.handleFormChange}
                 required
               />
               <label htmlFor="postTitle">
@@ -68,7 +104,13 @@ export default class PostForm extends Component {
           </div>
           <div className="row">
             <div className="input-field col s12">
-              <textarea id="postText" className="materialize-textarea"></textarea>
+              <textarea
+                value={this.state.text}
+                onChange={this.handleFormChange}
+                id="postText"
+                className="materialize-textarea"
+              >
+              </textarea>
               <label htmlFor="postText">Text</label>
             </div>
           </div>
@@ -78,6 +120,8 @@ export default class PostForm extends Component {
                 id="postUrl"
                 type="text"
                 className="validate"
+                value={this.state.url}
+                onChange={this.handleFormChange}
                 required
               />
               <label htmlFor="postUrl">
@@ -87,8 +131,13 @@ export default class PostForm extends Component {
           </div>
           <div className="row">
             <div className="input-field col s12">
-              <input type="checkbox" id="postPrivate" />
-              <label htmlFor="postPrivate">Private</label>
+              <input
+                checked={this.state.isPrivate}
+                type="checkbox"
+                id="postIsPrivate"
+                onClick={this.handleFormChange}
+              />
+              <label htmlFor="postIsPrivate">Private</label>
             </div>
           </div>
           <div className="row">
