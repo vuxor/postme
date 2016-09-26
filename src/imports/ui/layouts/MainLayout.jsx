@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import HeaderContainer from '../components/header/HeaderContainer.jsx';
+import Footer from '../components/footer/Footer.jsx';
 
 const MainLayout = (props) => (
   <div>
@@ -10,9 +11,7 @@ const MainLayout = (props) => (
     <div>
       {props.main}
     </div>
-    <div>
-      Footer
-    </div>
+    <Footer />
   </div>
 );
 
