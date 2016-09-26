@@ -9,7 +9,7 @@ const MainLayout = (props) => (
       <HeaderContainer />
     </div>
     <div className="jumbo"></div>
-    <div className="container">
+    <div className="main-area container">
       {props.main}
     </div>
     <Footer />
