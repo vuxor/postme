@@ -8,6 +8,7 @@ const MainLayout = (props) => (
     <div>
       <HeaderContainer />
     </div>
+    <div className="jumbo"></div>
     <div className="container">
       {props.main}
     </div>
