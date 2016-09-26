@@ -9,7 +9,7 @@ const MainLayout = (props) => (
       <HeaderContainer />
     </div>
     <div className="jumbo"></div>
-    <div className="main-area container">
+    <div className="main-area container card-panel">
       {props.main}
     </div>
     <Footer />

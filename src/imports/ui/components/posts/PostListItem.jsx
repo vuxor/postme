@@ -82,26 +82,47 @@ export default class PostListItem extends Component {
   render() {
     const post = this.props.post;
     return (
-      <div>
-        <p><span>{post.title} - {post.owner}</span></p>
-        <p>
-          votes: {post.votes},
-          {this.numberOfComments()},
-          {this.ownPost() &&
-            <span>
+      <div className="post-list-item row">
+        <div onClick={this.showComments} className="col s2 discuss">
+          <i className="medium material-icons">comment</i>
+          <p>Discuss</p>
+        </div>
+        <div className="col s8 post-details">
+          <div><h5 className="truncate">{post.title}</h5><span>{post.url}</span></div>
+          <div className="second-row">
+            <span>votes:&nbsp;{post.votes}</span>
+            <span>, submitted by {post.owner}</span>
+            <span>, {this.numberOfComments()}</span>
+          </div>
+        </div>
+        <div className="col s2 post-buttons">
+          <span>
+            {this.ownPost() &&
+              <span>
+                <a
+                  onClick={this.showUpdateForm}
+                  className="edit-post-btn waves-effect waves-light btn"
+                >
+                  Edit
+                </a>
+                <a
+                  onClick={this.showUpdateForm}
+                  className="red waves-effect waves-light btn"
+                >
+                  Delete
+                </a>
+              </span>
+            }
+            {(!this.isVoted() && !this.ownPost()) &&
               <a
-                onClick={this.showUpdateForm}
-                className="modal-trigger waves-effect waves-light btn"
+                onClick={this.votePost}
+                className="blue lighten-1 modal-trigger waves-effect waves-light btn"
               >
-                Edit
+                Vote
               </a>
-              <button>Delete</button>
-            </span>
-          },
-          {(!this.isVoted() && !this.ownPost()) && <button onClick={this.votePost}>Vote</button>}
-        </p>
-
-        <div>{<button onClick={this.showComments}>Discuss</button>}</div>
+            }
+          </span>
+        </div>
         {this.state.showComments &&
           <CommentsWrapper {...this.props} />}
         {this.state.showForm && <PostForm post={post} hideForm={this.showUpdateForm} />}

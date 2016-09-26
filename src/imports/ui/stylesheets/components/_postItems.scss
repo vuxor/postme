@@ -1,0 +1,23 @@
+.post-list {
+  .post-list-item {
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 5px;
+    .discuss {
+      cursor: pointer;
+      p {
+        margin: 0;
+        text-transform: uppercase;
+      }
+    }
+    .post-details {
+      .second-row {
+        font-size: .9rem;
+      }
+    }
+    .post-buttons {
+      .edit-post-btn {
+        margin-bottom: .5rem;
+      }
+    }
+  }
+}
