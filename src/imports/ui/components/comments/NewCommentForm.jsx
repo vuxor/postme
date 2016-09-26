@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { newComment } from '../../../api/posts/methods.js';
+import { Materialize } from 'meteor/materialize:materialize';
 
 export default class NewCommentForm extends Component {
   constructor(props) {
@@ -24,9 +25,11 @@ export default class NewCommentForm extends Component {
       text,
     }, (err) => {
       if (err) {
-        // handle the error here
+        Materialize.toast(err.reason, 4000);
       }
-      input.value = '';
+      this.setState({
+        comment: '',
+      });
     });
   }
   render() {
