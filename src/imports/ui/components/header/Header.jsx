@@ -26,7 +26,6 @@ export default class Header extends Component {
           <li><a onClick={() => FlowRouter.go('profile')}>Profile</a></li>
           <li><a onClick={() => FlowRouter.go('posts.public')}>Public posts</a></li>
           <li><a onClick={() => FlowRouter.go('posts.private')}>Private posts</a></li>
-          <li><a><AccountsUIWrapper /></a></li>
         </ul>
       );
     } else {
@@ -39,7 +38,6 @@ export default class Header extends Component {
       sideMenu = (
         <ul id="mobile-nav" className="side-nav">
           <li><a onClick={() => FlowRouter.go('posts.public.best')}>Hall of fame</a></li>
-          <li><a><AccountsUIWrapper /></a></li>
         </ul>
       );
     }
