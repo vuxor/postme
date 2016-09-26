@@ -14,6 +14,7 @@ class UserPublicPosts extends Component {
   render() {
     return (
       <div>
+        <h2 className="header">My public posts</h2>
         <PostListWrapper
           perPage={5}
           sub={'Posts.user.public'}

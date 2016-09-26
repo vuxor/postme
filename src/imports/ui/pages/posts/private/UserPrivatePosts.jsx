@@ -14,6 +14,7 @@ class UserPrivatePosts extends Component {
   render() {
     return (
       <div>
+        <h2 className="header">My private posts</h2>
         <PostListWrapper
           perPage={5}
           sub={'Posts.user.private'}
