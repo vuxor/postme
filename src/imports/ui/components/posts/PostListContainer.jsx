@@ -11,7 +11,11 @@ export default createContainer((params) => {
   params.loadingFunc(loading);
   let posts = [];
   if (!loading) {
-    posts = Posts.find({}, { sort: { createdAt: -1 } }).fetch();
+    if (sub === 'Posts.best') {
+      posts = Posts.find({}, { sort: { votes: -1 } }).fetch();
+    } else {
+      posts = Posts.find({}, { sort: { createdAt: -1 } }).fetch();
+    }
     if (posts.length < limit) {
       params.hitLimitFunc();
     }
