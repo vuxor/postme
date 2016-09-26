@@ -28,7 +28,7 @@ export default class PostList extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="post-list">
         {this.state.listData.map(post =>
           <PostListItem key={post._id} post={post} currentUser={this.props.currentUser} />
         )}

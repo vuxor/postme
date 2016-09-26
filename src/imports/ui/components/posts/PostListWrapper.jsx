@@ -41,7 +41,7 @@ export default class PostListWrapper extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="post-list-wrapper">
         <PostListContainer
           hitLimitFunc={this.hitLimitHandle}
           loadingFunc={this.loadingHandle}
@@ -50,9 +50,28 @@ export default class PostListWrapper extends Component {
           sub={this.props.sub}
         />
         {(!this.state.hitLimit && !this.state.loading) &&
-          <button onClick={() => this.setParams()}>Load more</button>
+          <a
+            className="load-more waves-effect waves-light btn"
+            onClick={() => this.setParams()}
+          >
+            <i className="material-icons">playlist_add</i>Load More
+          </a>
         }
-        {this.state.loading && 'Loading...'}
+        {this.state.loading &&
+          <div className="loading">
+            <div className="preloader-wrapper active">
+              <div className="spinner-layer spinner-red-only">
+                <div className="circle-clipper left">
+                  <div className="circle"></div>
+                </div><div className="gap-patch">
+                  <div className="circle"></div>
+                </div><div className="circle-clipper right">
+                  <div className="circle"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
       </div>
     );
   }
