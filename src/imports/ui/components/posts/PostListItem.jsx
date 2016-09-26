@@ -3,12 +3,14 @@ import React, { Component, PropTypes } from 'react';
 import { vote } from '../../../api/posts/methods.js';
 
 import CommentsWrapper from '../comments/CommentsWrapper.jsx';
+import PostForm from './PostForm.jsx';
 
 export default class PostListItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showComments: false,
+      showForm: false,
     };
     this.canVote = this.canVote.bind(this);
     this.votePost = this.votePost.bind(this);
@@ -16,6 +18,7 @@ export default class PostListItem extends Component {
     this.ownPost = this.ownPost.bind(this);
     this.numberOfComments = this.numberOfComments.bind(this);
     this.showComments = this.showComments.bind(this);
+    this.showUpdateForm = this.showUpdateForm.bind(this);
   }
   canVote() {
     const post = this.props.post;
@@ -70,6 +73,11 @@ export default class PostListItem extends Component {
   showComments() {
     this.setState({ showComments: !this.state.showComments });
   }
+  showUpdateForm() {
+    this.setState({
+      showForm: !this.state.showForm,
+    });
+  }
   render() {
     const post = this.props.post;
     return (
@@ -80,7 +88,12 @@ export default class PostListItem extends Component {
           {this.numberOfComments()},
           {this.ownPost() &&
             <span>
-              <a className="modal-trigger waves-effect waves-light btn" href="#postModal">Edit</a>
+              <a
+                onClick={this.showUpdateForm}
+                className="modal-trigger waves-effect waves-light btn"
+              >
+                Edit
+              </a>
               <button>Delete</button>
             </span>
           },
@@ -90,6 +103,7 @@ export default class PostListItem extends Component {
         <div>{<button onClick={this.showComments}>Discuss</button>}</div>
         {this.state.showComments &&
           <CommentsWrapper {...this.props} />}
+        {this.state.showForm && <PostForm post={post} />}
       </div>
     );
   }

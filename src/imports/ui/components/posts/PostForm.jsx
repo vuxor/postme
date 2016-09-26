@@ -1,5 +1,6 @@
+/* eslint no-underscore-dangle: 0 */
 import React, { Component, PropTypes } from 'react';
-import { insertPost } from '../../../api/posts/methods.js';
+import { insertPost, updatePost } from '../../../api/posts/methods.js';
 import { Materialize } from 'meteor/materialize:materialize';
 
 export default class PostForm extends Component {
@@ -19,13 +20,25 @@ export default class PostForm extends Component {
     postData.url = url.value.trim();
     postData.isPrivate = isPrivate.checked;
     if (!!post) {
-      console.log('update');
+      postData.postId = post._id;
+      updatePost.call({
+        postData,
+      }, (err) => {
+        if (err) {
+          Materialize.toast(err.reason, 4000);
+        }
+        title.value = '';
+        text.value = '';
+        url.value = '';
+        isPrivate.checked = false;
+        Materialize.toast('You successufully updated post', 4000);
+      });
     } else {
       insertPost.call({
         postData,
       }, (err) => {
         if (err) {
-          // handle the error here
+          Materialize.toast(err.reason, 4000);
         }
         title.value = '';
         text.value = '';

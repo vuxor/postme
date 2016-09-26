@@ -52,6 +52,33 @@ export const insertPost = new ValidatedMethod({
   },
 });
 
+export const updatePost = new ValidatedMethod({
+  name: 'posts.update',
+  validate: new SimpleSchema({
+    postData: { type: Object },
+    'postData.title': { type: String },
+    'postData.text': { type: String },
+    'postData.url': { type: String },
+    'postData.isPrivate': { type: Boolean },
+    'postData.postId': { type: String },
+  }).validator(),
+  run({ postData }) {
+    if (!this.userId) {
+      throw new Meteor.Error('not-authorized',
+        'You must be loged in to preform this action');
+    }
+
+    Posts.update(postData.postId, {
+      $set: {
+        title: postData.title,
+        text: postData.text,
+        url: postData.url,
+        isPrivate: postData.isPrivate,
+      },
+    });
+  },
+});
+
 export const newComment = new ValidatedMethod({
   name: 'posts.newComment',
   validate: new SimpleSchema({
