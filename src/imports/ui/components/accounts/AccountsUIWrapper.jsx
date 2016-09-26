@@ -4,6 +4,11 @@ import { Blaze } from 'meteor/blaze';
 
 export default class AccountsUIWrapper extends Component {
   componentDidMount() {
+    Template.loginButtons.helpers({
+      align() {
+        return 'right';
+      },
+    });
     this.value = Blaze.render(Template.loginButtons,
       document.getElementById('loginButtons'));
   }
