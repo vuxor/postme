@@ -79,6 +79,21 @@ export const updatePost = new ValidatedMethod({
   },
 });
 
+export const deletePostMethod = new ValidatedMethod({
+  name: 'posts.remove',
+  validate: new SimpleSchema({
+    postId: { type: String },
+  }).validator(),
+  run({ postId }) {
+    if (!this.userId) {
+      throw new Meteor.Error('not-authorized',
+        'You must be loged in to preform this action');
+    }
+    console.log(postId);
+    Posts.remove(postId);
+  },
+});
+
 export const newComment = new ValidatedMethod({
   name: 'posts.newComment',
   validate: new SimpleSchema({
