@@ -89,7 +89,6 @@ export const deletePostMethod = new ValidatedMethod({
       throw new Meteor.Error('not-authorized',
         'You must be loged in to preform this action');
     }
-    console.log(postId);
     Posts.remove(postId);
   },
 });

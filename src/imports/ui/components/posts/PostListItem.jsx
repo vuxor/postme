@@ -5,6 +5,7 @@ import { Materialize } from 'meteor/materialize:materialize';
 
 import CommentsWrapper from '../comments/CommentsWrapper.jsx';
 import PostForm from './PostForm.jsx';
+import PostDeleteModal from './PostDeleteModal.jsx';
 
 export default class PostListItem extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ export default class PostListItem extends Component {
     this.state = {
       showComments: false,
       showForm: false,
+      showDeleteModal: false,
     };
     this.canVote = this.canVote.bind(this);
     this.votePost = this.votePost.bind(this);
@@ -20,6 +22,7 @@ export default class PostListItem extends Component {
     this.numberOfComments = this.numberOfComments.bind(this);
     this.showComments = this.showComments.bind(this);
     this.showUpdateForm = this.showUpdateForm.bind(this);
+    this.confirmDelete = this.confirmDelete.bind(this);
   }
   canVote() {
     const post = this.props.post;
@@ -52,6 +55,11 @@ export default class PostListItem extends Component {
       if (this.props.post.voters.indexOf(currentUser._id) > -1) return true;
     }
     return false;
+  }
+  confirmDelete() {
+    this.setState({
+      showDeleteModal: true,
+    });
   }
   ownPost(currentUser = this.props.currentUser) {
     if (!!currentUser) {
@@ -91,9 +99,9 @@ export default class PostListItem extends Component {
           <div className="col s8 post-details">
             <div><h5 className="truncate">{post.title}</h5><span>{post.url}</span></div>
             <div className="second-row">
-              <span>votes:&nbsp;{post.votes}</span>
-              <span>, submitted by {post.owner}</span>
-              <span>, {this.numberOfComments()}</span>
+              <span>submitted by <b>{post.owner}</b></span>
+              <span>, votes:&nbsp;<b>{post.votes}</b></span>
+              <span className="right">{this.numberOfComments()}</span>
             </div>
           </div>
           <div className="col s2 post-buttons">
@@ -107,7 +115,7 @@ export default class PostListItem extends Component {
                     Edit
                   </a>
                   <a
-                    onClick={this.showUpdateForm}
+                    onClick={this.confirmDelete}
                     className="red waves-effect waves-light btn"
                   >
                     Delete
@@ -128,6 +136,9 @@ export default class PostListItem extends Component {
         {this.state.showComments &&
           <CommentsWrapper {...this.props} />}
         {this.state.showForm && <PostForm post={post} hideForm={this.showUpdateForm} />}
+        {this.state.showDeleteModal &&
+          <PostDeleteModal postId={this.props.post._id} />
+        }
       </div>
     );
   }

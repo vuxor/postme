@@ -55,7 +55,6 @@ export default class PostForm extends Component {
     }
   }
   savePost(e, post = this.props.post) {
-    console.log(post._id);
     e.preventDefault();
     const title = document.getElementById('postTitle');
     const text = document.getElementById('postText');
