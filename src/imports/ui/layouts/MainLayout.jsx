@@ -18,9 +18,7 @@ class MainLayout extends Component {
   render() {
     return (
       <div>
-        <div>
-          <HeaderContainer />
-        </div>
+        <HeaderContainer />
         <div className="jumbo"></div>
         <div className="main-area container card-panel">
           {this.props.children}
