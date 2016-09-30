@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Link } from 'react-router';
 
 import AccountsUIWrapper from '../accounts/AccountsUIWrapper.jsx';
 
@@ -13,31 +13,31 @@ export default class Header extends Component {
     if (this.props.currentUser) {
       list = (
         <ul id="nav-mobile" className="right hide-on-med-and-down">
-          <li><a onClick={() => FlowRouter.go('posts.public.best')}>Hall of fame</a></li>
-          <li><a onClick={() => FlowRouter.go('profile')}>Profile</a></li>
-          <li><a onClick={() => FlowRouter.go('posts.public')}>Public posts</a></li>
-          <li><a onClick={() => FlowRouter.go('posts.private')}>Private posts</a></li>
+          <li><Link to="/posts/public/best">Hall of fame</Link></li>
+          <li><Link to="/profile">Profile</Link></li>
+          <li><Link to="/posts/public">Public posts</Link></li>
+          <li><Link to="/posts/private">Private posts</Link></li>
           <li><a><AccountsUIWrapper /></a></li>
         </ul>
       );
       sideMenu = (
         <ul id="mobile-nav" className="side-nav">
-          <li><a onClick={() => FlowRouter.go('posts.public.best')}>Hall of fame</a></li>
-          <li><a onClick={() => FlowRouter.go('profile')}>Profile</a></li>
-          <li><a onClick={() => FlowRouter.go('posts.public')}>Public posts</a></li>
-          <li><a onClick={() => FlowRouter.go('posts.private')}>Private posts</a></li>
+          <li><Link to="/posts/public/best">Hall of fame</Link></li>
+          <li><Link to="/profile">Profile</Link></li>
+          <li><Link to="/posts/public">Public posts</Link></li>
+          <li><Link to="/posts/private">Private posts</Link></li>
         </ul>
       );
     } else {
       list = (
         <ul id="nav-mobile" className="right hide-on-med-and-down">
-          <li><a onClick={() => FlowRouter.go('posts.public.best')}>Hall of fame</a></li>
+          <li><Link to="/posts/public/best">Hall of fame</Link></li>
           <li><a><AccountsUIWrapper /></a></li>
         </ul>
       );
       sideMenu = (
         <ul id="mobile-nav" className="side-nav">
-          <li><a onClick={() => FlowRouter.go('posts.public.best')}>Hall of fame</a></li>
+          <li><Link to="/posts/public/best">Hall of fame</Link></li>
         </ul>
       );
     }
@@ -45,7 +45,7 @@ export default class Header extends Component {
       <div className="navbar-fixed">
         <nav className="main-nav">
           <div className="nav-wrapper">
-            <a onClick={() => FlowRouter.go('home')} className="brand-logo">Postme</a>
+            <li className="brand-logo"><Link to="/">Postme</Link></li>
             <a
               data-activates="mobile-nav"
               className="button-collapse"

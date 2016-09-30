@@ -24,6 +24,7 @@ Meteor.publish('Posts.best', (l = 10) => {
 Meteor.publish('Posts.user.public', function (l = 10) {
   check(l, Number);
   let limit = l;
+  if (!this.userId) return this.ready();
   const username = Meteor.users.findOne(this.userId).username;
   const count = Posts.find({ $and: [{ isPrivate: false }, { owner: username }] }).count();
   if (limit > count) {
@@ -46,6 +47,7 @@ Meteor.publish('Posts.user.public', function (l = 10) {
 Meteor.publish('Posts.user.private', function (l = 10) {
   check(l, Number);
   let limit = l;
+  if (!this.userId) return this.ready();
   const username = Meteor.users.findOne(this.userId).username;
   const count = Posts.find({ $and: [{ isPrivate: true }, { owner: username }] }).count();
   if (limit > count) {
