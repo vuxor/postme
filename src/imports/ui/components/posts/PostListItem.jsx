@@ -1,6 +1,6 @@
 /* eslint no-underscore-dangle: 0 */
 import React, { Component, PropTypes } from 'react';
-import { vote } from '../../../api/posts/methods.js';
+import { vote, deletePostMethod } from '../../../api/posts/methods.js';
 import { Materialize } from 'meteor/materialize:materialize';
 
 import CommentsWrapper from '../comments/CommentsWrapper.jsx';
@@ -23,6 +23,28 @@ export default class PostListItem extends Component {
     this.showComments = this.showComments.bind(this);
     this.showUpdateForm = this.showUpdateForm.bind(this);
     this.confirmDelete = this.confirmDelete.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+    this.deletePost = this.deletePost.bind(this);
+  }
+  hideModal(deletePost) {
+    if (!deletePost) {
+      this.setState({
+        showDeleteModal: false,
+      });
+    } else {
+      this.deletePost(this.props.post._id);
+    }
+  }
+  deletePost(postId) {
+    deletePostMethod.call({
+      postId,
+    }, (err) => {
+      if (err) {
+        Materialize.toast(err.reason, 4000);
+      } else {
+        Materialize.toast('Post deleted', 4000);
+      }
+    });
   }
   canVote() {
     const post = this.props.post;
@@ -137,7 +159,7 @@ export default class PostListItem extends Component {
           <CommentsWrapper {...this.props} />}
         {this.state.showForm && <PostForm post={post} hideForm={this.showUpdateForm} />}
         {this.state.showDeleteModal &&
-          <PostDeleteModal postId={this.props.post._id} />
+          <PostDeleteModal postId={this.props.post._id} closeModalcb={this.hideModal} />
         }
       </div>
     );

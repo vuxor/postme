@@ -1,25 +1,22 @@
 import React, { Component, PropTypes } from 'react';
-import { deletePostMethod } from '../../../api/posts/methods.js';
-import { Materialize } from 'meteor/materialize:materialize';
 
 export default class PostDeleteModal extends Component {
   constructor(props) {
     super(props);
-    this.deletePost = this.deletePost.bind(this);
+    this.state = {
+      deletePost: false,
+    };
+    this.handleDeletePost = this.handleDeletePost.bind(this);
   }
   componentDidMount() {
-    $('#confirm-delete').openModal();
+    $('#confirm-delete').openModal({
+      complete: () => this.props.closeModalcb(this.state.deletePost),
+    });
   }
-  deletePost(e, postId = this.props.postId) {
+  handleDeletePost(e) {
     e.preventDefault();
-    deletePostMethod.call({
-      postId,
-    }, (err) => {
-      if (err) {
-        Materialize.toast(err.reason, 4000);
-      } else {
-        Materialize.toast('Post deleted', 4000);
-      }
+    this.setState({
+      deletePost: true,
     });
   }
   render() {
@@ -32,7 +29,7 @@ export default class PostDeleteModal extends Component {
         <div className="modal-footer">
           <a
             className="red modal-action modal-close waves-effect waves-green btn"
-            onClick={this.deletePost}
+            onClick={this.handleDeletePost}
           >
             Delete
           </a>
@@ -45,4 +42,5 @@ export default class PostDeleteModal extends Component {
 
 PostDeleteModal.propTypes = {
   postId: PropTypes.string.isRequired,
+  closeModalcb: PropTypes.func.isRequired,
 };
