@@ -70,8 +70,12 @@ Meteor.publish('Posts.user.private', function (l = 10) {
 // eslint-disable-next-line func-names
 Meteor.publish('Posts.singlePost', function (id) {
   check(id, String);
-  return Posts.find({ $and: [
-    { _id: id },
-    { owner: this.userId },
-  ] });
+  const isPrivate = Posts.findOne(id).isPrivate;
+  if (isPrivate) {
+    return Posts.find({ $and: [
+      { _id: id },
+      { owner: this.userId },
+    ] });
+  }
+  return Posts.find(id);
 });
