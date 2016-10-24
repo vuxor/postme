@@ -119,7 +119,12 @@ export default class PostListItem extends Component {
             <p>Discuss</p>
           </div>
           <div className="col s8 post-details">
-            <div><h5 className="truncate">{post.title}</h5><span>{post.url}</span></div>
+            <div>
+              <h5 className="truncate">
+                <a href="">{post.title}</a>
+              </h5>
+              <span>{post.url}</span>
+            </div>
             <div className="second-row">
               <span>submitted by <b>{post.owner}</b></span>
               <span>, votes:&nbsp;<b>{post.votes}</b></span>
