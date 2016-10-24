@@ -72,9 +72,10 @@ Meteor.publish('Posts.singlePost', function (id) {
   check(id, String);
   const isPrivate = Posts.findOne(id).isPrivate;
   if (isPrivate) {
+    if (!this.userId) return this.ready();
     return Posts.find({ $and: [
       { _id: id },
-      { owner: this.userId },
+      { owner: Meteor.users.findOne(this.userid).username },
     ] });
   }
   return Posts.find(id);
