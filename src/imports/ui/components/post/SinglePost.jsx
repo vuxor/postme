@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 
-export const SinglePost = (props) => {
+const SinglePost = (props) => {
   return (
     <div className="row">
       <div className="col s12 m6">
@@ -22,3 +22,5 @@ export const SinglePost = (props) => {
 
 SinglePost.propTypes = {
 };
+
+export default SinglePost;
