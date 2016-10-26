@@ -9,6 +9,7 @@ import ProfileContainer from '../../ui/pages/profile/ProfileContainer.jsx';
 import UserPublicPosts from '../../ui/pages/posts/public/UserPublicPosts.jsx';
 import UserPrivatePosts from '../../ui/pages/posts/private/UserPrivatePosts.jsx';
 import UsersBestPosts from '../../ui/pages/posts/best/UsersBestPosts.jsx';
+import SinglePostContainer from '../../ui/components/post/SinglePostContainer';
 
 const requireLogin = (nextState, replace) => !Meteor.userId() && replace('/');
 
@@ -20,5 +21,6 @@ export const renderRoutes = () =>
       <Route path="/posts/public" component={UserPublicPosts} onEnter={requireLogin} />
       <Route path="/posts/private" component={UserPrivatePosts} onEnter={requireLogin} />
       <Route path="/posts/public/best" component={UsersBestPosts} />
+      <Route path="/post" component={SinglePostContainer} />
     </Route>
   </Router>;
