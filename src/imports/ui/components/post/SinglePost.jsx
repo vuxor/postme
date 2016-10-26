@@ -21,6 +21,8 @@ const SinglePost = (props) => {
 };
 
 SinglePost.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  post: PropTypes.object,
 };
 
 export default SinglePost;
