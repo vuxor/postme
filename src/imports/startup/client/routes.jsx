@@ -21,6 +21,6 @@ export const renderRoutes = () =>
       <Route path="/posts/public" component={UserPublicPosts} onEnter={requireLogin} />
       <Route path="/posts/private" component={UserPrivatePosts} onEnter={requireLogin} />
       <Route path="/posts/public/best" component={UsersBestPosts} />
-      <Route path="/post" component={SinglePostContainer} />
+      <Route path="/post/:id" component={SinglePostContainer} />
     </Route>
   </Router>;
