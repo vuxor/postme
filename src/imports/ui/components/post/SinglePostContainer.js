@@ -6,7 +6,7 @@ import SinglePost from './SinglePost.jsx';
 
 export default createContainer((id) => {
   const postHandle = Meteor.subscribe('Posts.singlePost', id);
-  const loading = postHandle.ready();
+  const loading = !postHandle.ready();
   return {
     post: Posts.findOne(id),
     loading,
