@@ -4,11 +4,11 @@ import { Meteor } from 'meteor/meteor';
 import { Posts } from '../../../api/posts/posts';
 import SinglePost from './SinglePost.jsx';
 
-export default createContainer((id) => {
-  const postHandle = Meteor.subscribe('Posts.singlePost', id);
+export default createContainer(props => {
+  const postHandle = Meteor.subscribe('Posts.singlePost', props.params.id);
   const loading = !postHandle.ready();
   return {
-    post: Posts.findOne(id),
+    post: Posts.findOne(props.params.id),
     loading,
   };
 }, SinglePost);
