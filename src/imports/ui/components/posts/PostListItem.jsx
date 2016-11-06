@@ -1,5 +1,6 @@
 /* eslint no-underscore-dangle: 0 */
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 import { vote, deletePostMethod } from '../../../api/posts/methods.js';
 import { Materialize } from 'meteor/materialize:materialize';
 
@@ -121,7 +122,7 @@ export default class PostListItem extends Component {
           <div className="col s8 post-details">
             <div>
               <h5 className="truncate">
-                <a href="">{post.title}</a>
+                <Link to={`/post/${post._id}`}>{post.title}</Link>
               </h5>
               <span>{post.url}</span>
             </div>
