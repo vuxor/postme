@@ -3,7 +3,7 @@ import { Random } from 'meteor/random';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-import { Posts } from './posts.js';
+import { Posts } from './posts';
 
 export const vote = new ValidatedMethod({
   name: 'posts.vote',
