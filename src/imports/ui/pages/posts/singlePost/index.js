@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-import SinglePostCard from '../../../components/post/SinglePostCard';
+import SinglePostContainer from '../../../components/post/SinglePostContainer';
 
 const SinglePost = (props) => (
   <div className="row">
     <div className="col s12 m6">
-      <SinglePostCard />
+      <SinglePostContainer id={props.params.id} />
     </div>
   </div>
 );
+
+SinglePost.propTypes = {
+  params: PropTypes.object.isRequired,
+};
 
 export default SinglePost;
