@@ -2,13 +2,13 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 
 import { Posts } from '../../../api/posts/posts';
-import SinglePost from './SinglePost.jsx';
+import SinglePostCard from './SinglePostCard';
 
 export default createContainer(props => {
-  const postHandle = Meteor.subscribe('Posts.singlePost', props.params.id);
+  const postHandle = Meteor.subscribe('Posts.singlePost', props.id);
   const loading = !postHandle.ready();
   return {
-    post: Posts.findOne(props.params.id),
+    post: Posts.findOne(props.id),
     loading,
   };
-}, SinglePost);
+}, SinglePostCard);
